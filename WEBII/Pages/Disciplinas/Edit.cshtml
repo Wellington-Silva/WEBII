@@ -1,0 +1,80 @@
+﻿@page
+@model WEBII.Pages.Disciplinas.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Disciplina</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Disciplina.Id" />
+            <div class="form-group">
+                <label asp-for="Disciplina.Nome" class="control-label"></label>
+                <input asp-for="Disciplina.Nome" class="form-control" />
+                <span asp-validation-for="Disciplina.Nome" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Disciplina.Periodo" class="control-label"></label>
+                <input asp-for="Disciplina.Periodo" class="form-control" />
+                <span asp-validation-for="Disciplina.Periodo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Disciplina.Categoria" class="control-label"></label>
+                <input asp-for="Disciplina.Categoria" class="form-control" />
+                <span asp-validation-for="Disciplina.Categoria" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Disciplina.Dificuldade" class="control-label"></label>
+                <input asp-for="Disciplina.Dificuldade" class="form-control" />
+                <span asp-validation-for="Disciplina.Dificuldade" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Disciplina.Creditos" class="control-label"></label>
+                <input asp-for="Disciplina.Creditos" class="form-control" />
+                <span asp-validation-for="Disciplina.Creditos" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Disciplina.HoraAula" class="control-label"></label>
+                <input asp-for="Disciplina.HoraAula" class="form-control" />
+                <span asp-validation-for="Disciplina.HoraAula" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Disciplina.HoraRelogio" class="control-label"></label>
+                <input asp-for="Disciplina.HoraRelogio" class="form-control" />
+                <span asp-validation-for="Disciplina.HoraRelogio" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Disciplina.qtdTeorica" class="control-label"></label>
+                <input asp-for="Disciplina.qtdTeorica" class="form-control" />
+                <span asp-validation-for="Disciplina.qtdTeorica" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Disciplina.qtdPratica" class="control-label"></label>
+                <input asp-for="Disciplina.qtdPratica" class="form-control" />
+                <span asp-validation-for="Disciplina.qtdPratica" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Disciplina.Ementa" class="control-label"></label>
+                <input asp-for="Disciplina.Ementa" class="form-control" />
+                <span asp-validation-for="Disciplina.Ementa" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
