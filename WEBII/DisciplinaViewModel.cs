@@ -1,4 +1,6 @@
-﻿namespace WEBII
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+
+namespace WEBII
 {
     public class DisciplinaViewModel
     {
@@ -8,7 +10,17 @@
 
         public Disciplina vDisciplina { get; set; }
 
-        public List<categoria> vListCategoria { get; set; }
+        public List<SelectListItem> vListCategoria { get; set; }
+
+
+        public List<SelectListItem> CarregarCategorias(int Id)
+        {
+
+           var lista = new List<SelectListItem>();
+
+
+            return lista;
+        }
 
     }
 }
