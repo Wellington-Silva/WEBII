@@ -27,7 +27,8 @@ namespace WEBII.Pages.Disciplinas
         {
             if (_context.Disciplina != null)
             {
-                Disciplina = await _context.Disciplina.ToListAsync();
+                Disciplina = await _context.Disciplina.Include("Categoria")
+                .ToListAsync();
             }
         }
     }

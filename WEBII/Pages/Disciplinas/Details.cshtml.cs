@@ -30,7 +30,7 @@ namespace WEBII.Pages.Disciplinas
                 return NotFound();
             }
 
-            var disciplina = await _context.Disciplina.FirstOrDefaultAsync(m => m.Id == id);
+            var disciplina = await _context.Disciplina.Include("Categoria").FirstOrDefaultAsync(m => m.Id == id);
             if (disciplina == null)
             {
                 return NotFound();

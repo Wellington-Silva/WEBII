@@ -18,6 +18,7 @@ namespace WEBII
         [Column("disciplina_periodo")]
         public int Periodo { get; set; }
 
+        public int categoriaId { get; set; }
         [Display(Name = "Categoria")]
         [Column("disciplina_categoria")]
         public categoria? Categoria { get; set; }

@@ -23,7 +23,7 @@ namespace WEBII.Pages.Disciplinas
         }
 
         [BindProperty]
-        public Disciplina Disciplina { get; set; } = default!;
+        public DisciplinaViewModel DisciplinaVM { get; set; } = new DisciplinaViewModel();
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -32,12 +32,13 @@ namespace WEBII.Pages.Disciplinas
                 return NotFound();
             }
 
-            var disciplina =  await _context.Disciplina.FirstOrDefaultAsync(m => m.Id == id);
+            var disciplina =  await _context.Disciplina.Include("Categoria").FirstOrDefaultAsync(m => m.Id == id);
             if (disciplina == null)
             {
                 return NotFound();
             }
-            Disciplina = disciplina;
+            DisciplinaVM.vDisciplina = disciplina;
+            DisciplinaVM.vListCategoria = popularListaCategorias();
 
             ViewData["UfId"] = new SelectList(_context.categoria, "Id", "Initials");
             return Page();
@@ -52,7 +53,7 @@ namespace WEBII.Pages.Disciplinas
                 return Page();
             }
 
-            _context.Attach(Disciplina).State = EntityState.Modified;
+            _context.Attach(DisciplinaVM.vDisciplina).State = EntityState.Modified;
 
             try
             {
@@ -60,7 +61,7 @@ namespace WEBII.Pages.Disciplinas
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!DisciplinaExists(Disciplina.Id))
+                if (!DisciplinaExists(DisciplinaVM.vDisciplina.Id))
                 {
                     return NotFound();
                 }
@@ -76,6 +77,16 @@ namespace WEBII.Pages.Disciplinas
         private bool DisciplinaExists(int id)
         {
           return (_context.Disciplina?.Any(e => e.Id == id)).GetValueOrDefault();
+        }
+
+        private List<SelectListItem> popularListaCategorias()
+        {
+            return _context.categoria
+                                      .Select(a => new SelectListItem()
+                                      {
+                                          Value = a.Id.ToString(),
+                                          Text = a.Categoria_Nome
+                                      }).ToList();
         }
     }
 }

@@ -42,11 +42,6 @@ namespace WEBII.Pages.Disciplinas
                 return Page();
             }
 
-            DisciplinaVM.vDisciplina.Categoria.Categoria_Nome =
-                _context.categoria.
-                FirstOrDefault(a => a.Id == DisciplinaVM.vDisciplina.Categoria.Id).
-                Categoria_Nome;
-
             _context.Disciplina.Add(DisciplinaVM.vDisciplina);
             await _context.SaveChangesAsync();
 
