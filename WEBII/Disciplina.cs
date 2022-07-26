@@ -20,7 +20,7 @@ namespace WEBII
 
         [Display(Name = "Categoria")]
         [Column("disciplina_categoria")]
-        public String? Categoria { get; set; }
+        public categoria? Categoria { get; set; }
 
         [Display(Name = "Dificuldade")]
         [Column("disciplina_dificuldade")]
