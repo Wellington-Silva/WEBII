@@ -1,10 +1,8 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WEBII
 {
-    [Authorize]
     [Table("prerequisitos")]
     public class PreRequisito
     {
