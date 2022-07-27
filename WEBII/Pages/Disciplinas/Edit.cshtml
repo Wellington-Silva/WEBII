@@ -13,56 +13,56 @@
     <div class="col-md-4">
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Disciplina.Id" />
+            <input type="hidden" asp-for="DisciplinaVM.vDisciplina.Id" />
             <div class="form-group">
-                <label asp-for="Disciplina.Nome" class="control-label"></label>
-                <input asp-for="Disciplina.Nome" class="form-control" />
-                <span asp-validation-for="Disciplina.Nome" class="text-danger"></span>
+                <label asp-for="DisciplinaVM.vDisciplina.Nome" class="control-label"></label>
+                <input asp-for="DisciplinaVM.vDisciplina.Nome" class="form-control" />
+                <span asp-validation-for="DisciplinaVM.vDisciplina.Nome" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Disciplina.Periodo" class="control-label"></label>
-                <input asp-for="Disciplina.Periodo" class="form-control" />
-                <span asp-validation-for="Disciplina.Periodo" class="text-danger"></span>
+                <label asp-for="DisciplinaVM.vDisciplina.Periodo" class="control-label"></label>
+                <input asp-for="DisciplinaVM.vDisciplina.Periodo" class="form-control" />
+                <span asp-validation-for="DisciplinaVM.vDisciplina.Periodo" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Disciplina.Categoria" class="control-label"></label>
-                <input asp-for="Disciplina.Categoria" class="form-control" />
-                <span asp-validation-for="Disciplina.Categoria" class="text-danger"></span>
+                <label asp-for="DisciplinaVM.vDisciplina.Categoria" class="control-label"></label>
+                <select asp-for="DisciplinaVM.vDisciplina.categoriaId" asp-items="@Model.DisciplinaVM.vListCategoria" class="form-control"></select>
+                <span asp-validation-for="DisciplinaVM.vDisciplina.Categoria" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Disciplina.Dificuldade" class="control-label"></label>
-                <input asp-for="Disciplina.Dificuldade" class="form-control" />
-                <span asp-validation-for="Disciplina.Dificuldade" class="text-danger"></span>
+                <label asp-for="DisciplinaVM.vDisciplina.Dificuldade" class="control-label"></label>
+                <input asp-for="DisciplinaVM.vDisciplina.Dificuldade" class="form-control" />
+                <span asp-validation-for="DisciplinaVM.vDisciplina.Dificuldade" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Disciplina.Creditos" class="control-label"></label>
-                <input asp-for="Disciplina.Creditos" class="form-control" />
-                <span asp-validation-for="Disciplina.Creditos" class="text-danger"></span>
+                <label asp-for="DisciplinaVM.vDisciplina.Creditos" class="control-label"></label>
+                <input asp-for="DisciplinaVM.vDisciplina.Creditos" class="form-control" />
+                <span asp-validation-for="DisciplinaVM.vDisciplina.Creditos" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Disciplina.HoraAula" class="control-label"></label>
-                <input asp-for="Disciplina.HoraAula" class="form-control" />
-                <span asp-validation-for="Disciplina.HoraAula" class="text-danger"></span>
+                <label asp-for="DisciplinaVM.vDisciplina.HoraAula" class="control-label"></label>
+                <input asp-for="DisciplinaVM.vDisciplina.HoraAula" class="form-control" />
+                <span asp-validation-for="DisciplinaVM.vDisciplina.HoraAula" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Disciplina.HoraRelogio" class="control-label"></label>
-                <input asp-for="Disciplina.HoraRelogio" class="form-control" />
-                <span asp-validation-for="Disciplina.HoraRelogio" class="text-danger"></span>
+                <label asp-for="DisciplinaVM.vDisciplina.HoraRelogio" class="control-label"></label>
+                <input asp-for="DisciplinaVM.vDisciplina.HoraRelogio" class="form-control" />
+                <span asp-validation-for="DisciplinaVM.vDisciplina.HoraRelogio" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Disciplina.qtdTeorica" class="control-label"></label>
-                <input asp-for="Disciplina.qtdTeorica" class="form-control" />
-                <span asp-validation-for="Disciplina.qtdTeorica" class="text-danger"></span>
+                <label asp-for="DisciplinaVM.vDisciplina.qtdTeorica" class="control-label"></label>
+                <input asp-for="DisciplinaVM.vDisciplina.qtdTeorica" class="form-control" />
+                <span asp-validation-for="DisciplinaVM.vDisciplina.qtdTeorica" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Disciplina.qtdPratica" class="control-label"></label>
-                <input asp-for="Disciplina.qtdPratica" class="form-control" />
-                <span asp-validation-for="Disciplina.qtdPratica" class="text-danger"></span>
+                <label asp-for="DisciplinaVM.vDisciplina.qtdPratica" class="control-label"></label>
+                <input asp-for="DisciplinaVM.vDisciplina.qtdPratica" class="form-control" />
+                <span asp-validation-for="DisciplinaVM.vDisciplina.qtdPratica" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Disciplina.Ementa" class="control-label"></label>
-                <input asp-for="Disciplina.Ementa" class="form-control" />
-                <span asp-validation-for="Disciplina.Ementa" class="text-danger"></span>
+                <label asp-for="DisciplinaVM.vDisciplina.Ementa" class="control-label"></label>
+                <input asp-for="DisciplinaVM.vDisciplina.Ementa" class="form-control" />
+                <span asp-validation-for="DisciplinaVM.vDisciplina.Ementa" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />

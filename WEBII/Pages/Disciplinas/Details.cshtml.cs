@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
@@ -11,7 +10,6 @@ using WEBII.Data;
 
 namespace WEBII.Pages.Disciplinas
 {
-    [Authorize]
     public class DetailsModel : PageModel
     {
         private readonly WEBII.Data.ApplicationDbContext _context;
@@ -30,7 +28,7 @@ namespace WEBII.Pages.Disciplinas
                 return NotFound();
             }
 
-            var disciplina = await _context.Disciplina.FirstOrDefaultAsync(m => m.Id == id);
+            var disciplina = await _context.Disciplina.Include("Categoria").FirstOrDefaultAsync(m => m.Id == id);
             if (disciplina == null)
             {
                 return NotFound();
