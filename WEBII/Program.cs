@@ -11,8 +11,11 @@ builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseMySql(
         serverVersion: Microsoft.EntityFrameworkCore.ServerVersion.Parse("10.4.21-mysql")));
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddRazorPages();
+
+
 
 var app = builder.Build();
 
