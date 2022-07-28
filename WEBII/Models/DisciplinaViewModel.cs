@@ -9,7 +9,7 @@ namespace WEBII
 
         public List<SelectListItem>? vListCategoria { get; set; }
 
-        // public PreRequisito vPreRequisito { get; set; } 
+        public List<SelectListItem>? vListPreRequisito { get; set; }
 
     }
 }

@@ -12,9 +12,9 @@ namespace WEBII.Data
         }
         public DbSet<Disciplina>? Disciplina { get; set; }
 
-        public DbSet<PreRequisito>? PreRequisito { get; set; }
-
         public DbSet<categoria>? categoria { get; set; }
+
+        public DbSet<Prerequisito>? Prerequisito { get; set; }
 
         public DbSet<WEBII.Models.PerfilVM>? Perfil { get; set; }
 

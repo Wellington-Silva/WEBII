@@ -65,6 +65,21 @@
                 <input asp-for="DisciplinaVM.vDisciplina.Ementa" class="form-control" />
                 <span asp-validation-for="DisciplinaVM.vDisciplina.Ementa" class="text-danger"></span>
             </div>
+            @if (Model.DisciplinaVM.vListPreRequisito != null) {
+                <table>
+                    @foreach (var prerequisito in Model.DisciplinaVM.vListPreRequisito)
+                    {
+                        <tr>
+                            <td>
+                                <input id="@prerequisito.Value" type="checkbox" name="prerequisitos" value="@prerequisito.Value" checked="@prerequisito.Selected"/>
+                            </td>
+                            <td>
+                                <label for="@prerequisito.Value">@prerequisito.Text</label>
+                            </td>
+                        </tr>
+                    }
+                </table>
+            }
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
