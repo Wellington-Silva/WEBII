@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace WEBII
 {
@@ -9,6 +10,6 @@ namespace WEBII
         public List<SelectListItem>? vListCategoria { get; set; }
 
         // public PreRequisito vPreRequisito { get; set; } 
-        
+
     }
 }
