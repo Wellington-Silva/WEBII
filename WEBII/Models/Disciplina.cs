@@ -17,13 +17,9 @@ namespace WEBII
         [Display(Name = "Periodo")]
         [Column("disciplina_periodo")]
         public int Periodo { get; set; }
-<<<<<<< HEAD
         [Display(Name = "categoriaId")]
         [Column("disciplina_CategoriaId")]
-=======
-
         [Range(1, 100, ErrorMessage = "Please select a Categoria")]
->>>>>>> df84809 (Adicionando validacao para dropdownlist com mudancas no model de Disciplina)
         public int categoriaId { get; set; }
         [Display(Name = "Categoria")]
         [Column("disciplina_categoria")]
