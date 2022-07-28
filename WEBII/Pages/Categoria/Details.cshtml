@@ -2,24 +2,51 @@
 @model WEBII.Pages.Categoria.DetailsModel
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Detalhes";
 }
 
-<h1>Details</h1>
+<h1>@ViewData["Title"]</h1>
 
 <div>
-    <h4>categoria</h4>
+    <h4>Categoria:</h4>
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.categoria.Categoria_Nome)
+            @Html.DisplayNameFor(model => model.CategoriaVM.Categoria.Id)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.categoria.Categoria_Nome)
+            @Html.DisplayFor(model => model.CategoriaVM.Categoria.Id)
         </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CategoriaVM.Categoria.Categoria_Nome)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CategoriaVM.Categoria.Categoria_Nome)
+        </dd>
+
+        <h4>Lista de disciplinas dessa categoria:</h4>
+        <table class="table">
+            <thead>
+                <tr>    
+                    <th>Nome </th>
+                    <th>Período</th>
+                    <th>Detalhes</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.CategoriaVM.Disciplinas)
+                {
+                   <tr>
+                        <td>@Html.DisplayFor(modelItem => item.Nome)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Periodo)</td>
+                        <td><a asp-page="../Disciplinas/Details" asp-route-id="@item.Id">Ver disciplina</a> </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
     </dl>
 </div>
 <div>
-    <a asp-page="./Edit" asp-route-id="@Model.categoria?.Id">Edit</a> |
-    <a asp-page="./Index">Back to List</a>
+    <a asp-page="./Edit" asp-route-id="@Model.CategoriaVM.Categoria?.Id">Manutenção</a> |
+    <a asp-page="./Index">Voltar</a>
 </div>

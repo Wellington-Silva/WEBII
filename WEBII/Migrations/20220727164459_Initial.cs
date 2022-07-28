@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace WEBII.Migrations
 {
-    public partial class initial : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -79,32 +79,6 @@ namespace WEBII.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_categoria", x => x.categoria_id);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
-
-            migrationBuilder.CreateTable(
-                name: "disciplinas",
-                columns: table => new
-                {
-                    disciplina_id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    disciplina_nome = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    disciplina_periodo = table.Column<int>(type: "int", nullable: false),
-                    disciplina_categoria = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    disciplina_dificuldade = table.Column<double>(type: "double", nullable: false),
-                    disciplina_creditos = table.Column<int>(type: "int", nullable: false),
-                    disciplina_horaAula = table.Column<int>(type: "int", nullable: false),
-                    disciplina_horaRelogio = table.Column<int>(type: "int", nullable: false),
-                    disciplina_qtdTeorica = table.Column<int>(type: "int", nullable: false),
-                    disciplina_qtdPratica = table.Column<int>(type: "int", nullable: false),
-                    disciplina_ementa = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4")
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_disciplinas", x => x.disciplina_id);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -255,6 +229,37 @@ namespace WEBII.Migrations
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
+            migrationBuilder.CreateTable(
+                name: "disciplinas",
+                columns: table => new
+                {
+                    disciplina_id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    disciplina_nome = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    disciplina_periodo = table.Column<int>(type: "int", nullable: false),
+                    categoriaId = table.Column<int>(type: "int", nullable: false),
+                    disciplina_dificuldade = table.Column<double>(type: "double", nullable: false),
+                    disciplina_creditos = table.Column<int>(type: "int", nullable: false),
+                    disciplina_horaAula = table.Column<int>(type: "int", nullable: false),
+                    disciplina_horaRelogio = table.Column<int>(type: "int", nullable: false),
+                    disciplina_qtdTeorica = table.Column<int>(type: "int", nullable: false),
+                    disciplina_qtdPratica = table.Column<int>(type: "int", nullable: false),
+                    disciplina_ementa = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_disciplinas", x => x.disciplina_id);
+                    table.ForeignKey(
+                        name: "FK_disciplinas_categoria_categoriaId",
+                        column: x => x.categoriaId,
+                        principalTable: "categoria",
+                        principalColumn: "categoria_id",
+                        onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -291,6 +296,11 @@ namespace WEBII.Migrations
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_disciplinas_categoriaId",
+                table: "disciplinas",
+                column: "categoriaId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -311,9 +321,6 @@ namespace WEBII.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "categoria");
-
-            migrationBuilder.DropTable(
                 name: "disciplinas");
 
             migrationBuilder.DropTable(
@@ -324,6 +331,9 @@ namespace WEBII.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "categoria");
         }
     }
 }

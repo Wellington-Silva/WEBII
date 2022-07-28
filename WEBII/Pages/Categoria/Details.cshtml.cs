@@ -19,7 +19,7 @@ namespace WEBII.Pages.Categoria
             _context = context;
         }
 
-      public categoria categoria { get; set; } = default!; 
+        public CategoriaViewModel CategoriaVM { get; set; } = new CategoriaViewModel();
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -35,7 +35,9 @@ namespace WEBII.Pages.Categoria
             }
             else 
             {
-                categoria = categoria;
+                var disciplinas = await _context.Disciplina.Where(m => m.categoriaId == categoria.Id).ToListAsync();
+                CategoriaVM.Categoria = categoria;
+                CategoriaVM.Disciplinas = disciplinas;
             }
             return Page();
         }

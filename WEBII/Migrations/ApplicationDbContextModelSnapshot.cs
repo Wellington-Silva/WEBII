@@ -2,7 +2,6 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WEBII.Data;
 
@@ -11,10 +10,9 @@ using WEBII.Data;
 namespace WEBII.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220726032120_initial")]
-    partial class initial
+    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -240,10 +238,6 @@ namespace WEBII.Migrations
                         .HasColumnType("int")
                         .HasColumnName("disciplina_id");
 
-                    b.Property<string>("Categoria")
-                        .HasColumnType("longtext")
-                        .HasColumnName("disciplina_categoria");
-
                     b.Property<int>("Creditos")
                         .HasColumnType("int")
                         .HasColumnName("disciplina_creditos");
@@ -272,6 +266,9 @@ namespace WEBII.Migrations
                         .HasColumnType("int")
                         .HasColumnName("disciplina_periodo");
 
+                    b.Property<int>("categoriaId")
+                        .HasColumnType("int");
+
                     b.Property<int>("qtdPratica")
                         .HasColumnType("int")
                         .HasColumnName("disciplina_qtdPratica");
@@ -281,6 +278,8 @@ namespace WEBII.Migrations
                         .HasColumnName("disciplina_qtdTeorica");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("categoriaId");
 
                     b.ToTable("disciplinas");
                 });
@@ -366,6 +365,17 @@ namespace WEBII.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("WEBII.Disciplina", b =>
+                {
+                    b.HasOne("WEBII.categoria", "Categoria")
+                        .WithMany()
+                        .HasForeignKey("categoriaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Categoria");
                 });
 #pragma warning restore 612, 618
         }
