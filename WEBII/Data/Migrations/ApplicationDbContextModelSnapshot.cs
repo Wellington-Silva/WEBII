@@ -2,7 +2,6 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WEBII.Data;
 
@@ -11,10 +10,9 @@ using WEBII.Data;
 namespace WEBII.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220728021833_atualizandoModelDisciplinaParaValidacao")]
-    partial class atualizandoModelDisciplinaParaValidacao
+    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -270,7 +268,8 @@ namespace WEBII.Migrations
                         .HasColumnName("disciplina_periodo");
 
                     b.Property<int>("categoriaId")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("disciplina_CategoriaId");
 
                     b.Property<int>("qtdPratica")
                         .HasColumnType("int")
@@ -285,6 +284,57 @@ namespace WEBII.Migrations
                     b.HasIndex("categoriaId");
 
                     b.ToTable("disciplinas");
+                });
+
+            modelBuilder.Entity("WEBII.Models.PerfilVM", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("varchar(255)")
+                        .HasColumnName("Id");
+
+                    b.Property<string>("Nome")
+                        .HasColumnType("longtext")
+                        .HasColumnName("Name");
+
+                    b.Property<string>("NomeNormalizado")
+                        .HasColumnType("longtext")
+                        .HasColumnName("NormalizedName");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("aspnetroles");
+                });
+
+            modelBuilder.Entity("WEBII.Models.UserRoleVM", b =>
+                {
+                    b.Property<string>("IdRole")
+                        .HasColumnType("longtext")
+                        .HasColumnName("RoleId");
+
+                    b.Property<string>("IdUser")
+                        .HasColumnType("longtext")
+                        .HasColumnName("UserId");
+
+                    b.ToTable("aspnetuserroles");
+                });
+
+            modelBuilder.Entity("WEBII.Models.UsuarioVM", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("varchar(255)")
+                        .HasColumnName("Id");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("longtext")
+                        .HasColumnName("Email");
+
+                    b.Property<string>("Nome")
+                        .HasColumnType("longtext")
+                        .HasColumnName("UserName");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("aspnetusers");
                 });
 
             modelBuilder.Entity("WEBII.PreRequisito", b =>

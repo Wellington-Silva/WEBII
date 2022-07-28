@@ -6,12 +6,29 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace WEBII.Migrations
 {
-    public partial class Initial : Migration
+    public partial class novaMigrationInicial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AlterDatabase()
                 .Annotation("MySql:CharSet", "utf8mb4");
+
+            // migrationBuilder.CreateTable(
+            //     name: "aspnetroles",
+            //     columns: table => new
+            //     {
+            //         Id = table.Column<string>(type: "varchar(255)", nullable: false)
+            //             .Annotation("MySql:CharSet", "utf8mb4"),
+            //         Name = table.Column<string>(type: "longtext", nullable: true)
+            //             .Annotation("MySql:CharSet", "utf8mb4"),
+            //         NormalizedName = table.Column<string>(type: "longtext", nullable: true)
+            //             .Annotation("MySql:CharSet", "utf8mb4")
+            //     },
+            //     constraints: table =>
+            //     {
+            //         table.PrimaryKey("PK_aspnetroles", x => x.Id);
+            //     })
+            //     .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
                 name: "AspNetRoles",
@@ -31,6 +48,37 @@ namespace WEBII.Migrations
                     table.PrimaryKey("PK_AspNetRoles", x => x.Id);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
+
+            // migrationBuilder.CreateTable(
+            //     name: "aspnetuserroles",
+            //     columns: table => new
+            //     {
+            //         UserId = table.Column<string>(type: "longtext", nullable: true)
+            //             .Annotation("MySql:CharSet", "utf8mb4"),
+            //         RoleId = table.Column<string>(type: "longtext", nullable: true)
+            //             .Annotation("MySql:CharSet", "utf8mb4")
+            //     },
+            //     constraints: table =>
+            //     {
+            //     })
+            //     .Annotation("MySql:CharSet", "utf8mb4");
+
+            // migrationBuilder.CreateTable(
+            //     name: "aspnetusers",
+            //     columns: table => new
+            //     {
+            //         Id = table.Column<string>(type: "varchar(255)", nullable: false)
+            //             .Annotation("MySql:CharSet", "utf8mb4"),
+            //         UserName = table.Column<string>(type: "longtext", nullable: true)
+            //             .Annotation("MySql:CharSet", "utf8mb4"),
+            //         Email = table.Column<string>(type: "longtext", nullable: true)
+            //             .Annotation("MySql:CharSet", "utf8mb4")
+            //     },
+            //     constraints: table =>
+            //     {
+            //         table.PrimaryKey("PK_aspnetusers", x => x.Id);
+            //     })
+            //     .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
                 name: "AspNetUsers",
@@ -235,10 +283,10 @@ namespace WEBII.Migrations
                 {
                     disciplina_id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    disciplina_nome = table.Column<string>(type: "longtext", nullable: true)
+                    disciplina_nome = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     disciplina_periodo = table.Column<int>(type: "int", nullable: false),
-                    categoriaId = table.Column<int>(type: "int", nullable: false),
+                    disciplina_CategoriaId = table.Column<int>(type: "int", nullable: false),
                     disciplina_dificuldade = table.Column<double>(type: "double", nullable: false),
                     disciplina_creditos = table.Column<int>(type: "int", nullable: false),
                     disciplina_horaAula = table.Column<int>(type: "int", nullable: false),
@@ -252,8 +300,8 @@ namespace WEBII.Migrations
                 {
                     table.PrimaryKey("PK_disciplinas", x => x.disciplina_id);
                     table.ForeignKey(
-                        name: "FK_disciplinas_categoria_categoriaId",
-                        column: x => x.categoriaId,
+                        name: "FK_disciplinas_categoria_disciplina_CategoriaId",
+                        column: x => x.disciplina_CategoriaId,
                         principalTable: "categoria",
                         principalColumn: "categoria_id",
                         onDelete: ReferentialAction.Cascade);
@@ -298,9 +346,9 @@ namespace WEBII.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_disciplinas_categoriaId",
+                name: "IX_disciplinas_disciplina_CategoriaId",
                 table: "disciplinas",
-                column: "categoriaId");
+                column: "disciplina_CategoriaId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -309,13 +357,22 @@ namespace WEBII.Migrations
                 name: "AspNetRoleClaims");
 
             migrationBuilder.DropTable(
+                name: "aspnetroles");
+
+            migrationBuilder.DropTable(
                 name: "AspNetUserClaims");
 
             migrationBuilder.DropTable(
                 name: "AspNetUserLogins");
 
             migrationBuilder.DropTable(
+                name: "aspnetuserroles");
+
+            migrationBuilder.DropTable(
                 name: "AspNetUserRoles");
+
+            migrationBuilder.DropTable(
+                name: "aspnetusers");
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
