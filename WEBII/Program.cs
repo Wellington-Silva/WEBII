@@ -5,9 +5,9 @@ using WEBII.Data;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-var connectionString = builder.Configuration.GetConnectionString("ContextoConnection");
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseMySql(
-        "Server=localhost;DataBase=local;Uid=root;Pwd=",
+        "Server=localhost;DataBase=local;Uid=root;Pwd=dkvh2o22",
         serverVersion: Microsoft.EntityFrameworkCore.ServerVersion.Parse("10.4.21-mysql")));
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
