@@ -1,0 +1,33 @@
+﻿@page
+@model WEBII.Pages.Usuario.RoleModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>UsuarioVM</h4>
+    <hr />
+    <form method="post">
+    <dl class="row">
+        <div class="form-group">
+        <label asp-for="ViewModel.vUserRole.IdRole" class="control-label"></label>
+        <select asp-for="ViewModel.vUserRole.IdRole" asp-items="@Model.ViewModel.vListPerfil" class="form-control">
+            <option value="-1"></option>
+        </select>
+        <span asp-validation-for="ViewModel.vUserRole.IdRole" class="text-danger"></span>
+    </div>
+    </dl>
+    <div class="form-group">
+        <input type="submit" value="Create" class="btn btn-primary" />
+    </div>
+    </form>
+</div>
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

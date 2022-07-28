@@ -1,0 +1,40 @@
+﻿@page
+@model WEBII.Pages.Perfil.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>PerfilVM</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="PerfilVM.Id" />
+            <div class="form-group">
+                <label asp-for="PerfilVM.Nome" class="control-label"></label>
+                <input asp-for="PerfilVM.Nome" class="form-control" />
+                <span asp-validation-for="PerfilVM.Nome" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PerfilVM.NomeNormalizado" class="control-label"></label>
+                <input asp-for="PerfilVM.NomeNormalizado" class="form-control" />
+                <span asp-validation-for="PerfilVM.NomeNormalizado" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

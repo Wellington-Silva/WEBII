@@ -7,7 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("ContextoConnection");
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseMySql(
-        "Server=localhost;DataBase=local;Uid=root;Pwd=Arvoredeip@123",
+        "Server=localhost;DataBase=local;Uid=root;Pwd=",
         serverVersion: Microsoft.EntityFrameworkCore.ServerVersion.Parse("10.4.21-mysql")));
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
