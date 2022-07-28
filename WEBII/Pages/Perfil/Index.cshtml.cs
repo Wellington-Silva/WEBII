@@ -2,17 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using WEBII;
 using WEBII.Data;
+using WEBII.Models;
 
-namespace WEBII.Pages.Disciplinas
+namespace WEBII.Pages.Perfil
 {
-    [Authorize(Roles="admin")]
     public class IndexModel : PageModel
     {
         private readonly WEBII.Data.ApplicationDbContext _context;
@@ -22,14 +19,13 @@ namespace WEBII.Pages.Disciplinas
             _context = context;
         }
 
-        public IList<Disciplina> Disciplina { get;set; } = default!;
+        public IList<PerfilVM> PerfilVM { get;set; } = default!;
 
         public async Task OnGetAsync()
         {
-            if (_context.Disciplina != null)
+            if (_context.Perfil != null)
             {
-                Disciplina = await _context.Disciplina.Include("Categoria")
-                .ToListAsync();
+                PerfilVM = await _context.Perfil.ToListAsync();
             }
         }
     }
