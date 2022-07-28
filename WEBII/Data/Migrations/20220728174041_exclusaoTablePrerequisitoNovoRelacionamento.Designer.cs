@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WEBII.Data;
 
@@ -10,14 +11,30 @@ using WEBII.Data;
 namespace WEBII.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220728174041_exclusaoTablePrerequisitoNovoRelacionamento")]
+    partial class exclusaoTablePrerequisitoNovoRelacionamento
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "6.0.7")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
+
+            modelBuilder.Entity("DisciplinaDisciplina", b =>
+                {
+                    b.Property<int>("DisciplinaRequeridaId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PrerequisitosId")
+                        .HasColumnType("int");
+
+                    b.HasKey("DisciplinaRequeridaId", "PrerequisitosId");
+
+                    b.HasIndex("PrerequisitosId");
+
+                    b.ToTable("DisciplinaDisciplina");
+                });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
@@ -337,25 +354,19 @@ namespace WEBII.Migrations
                     b.ToTable("aspnetusers");
                 });
 
-            modelBuilder.Entity("WEBII.Prerequisito", b =>
+            modelBuilder.Entity("DisciplinaDisciplina", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                    b.HasOne("WEBII.Disciplina", null)
+                        .WithMany()
+                        .HasForeignKey("DisciplinaRequeridaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Property<int>("DisciplinaRequeridaId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PrerequisitoDisciplinaId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("DisciplinaRequeridaId");
-
-                    b.HasIndex("PrerequisitoDisciplinaId");
-
-                    b.ToTable("Prerequisito");
+                    b.HasOne("WEBII.Disciplina", null)
+                        .WithMany()
+                        .HasForeignKey("PrerequisitosId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -418,25 +429,6 @@ namespace WEBII.Migrations
                         .IsRequired();
 
                     b.Navigation("Categoria");
-                });
-
-            modelBuilder.Entity("WEBII.Prerequisito", b =>
-                {
-                    b.HasOne("WEBII.Disciplina", "DisciplinaRequerida")
-                        .WithMany()
-                        .HasForeignKey("DisciplinaRequeridaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("WEBII.Disciplina", "PrerequisitoDisciplina")
-                        .WithMany()
-                        .HasForeignKey("PrerequisitoDisciplinaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("DisciplinaRequerida");
-
-                    b.Navigation("PrerequisitoDisciplina");
                 });
 #pragma warning restore 612, 618
         }

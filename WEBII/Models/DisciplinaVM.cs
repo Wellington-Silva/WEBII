@@ -17,7 +17,7 @@ namespace WEBII
         [Display(Name = "Periodo")]
         [Column("disciplina_periodo")]
         public int Periodo { get; set; }
-        
+
         [Display(Name = "categoriaId")]
         [Column("disciplina_CategoriaId")]
         [Range(1, 100, ErrorMessage = "Please select a Categoria")]
@@ -54,6 +54,6 @@ namespace WEBII
         [Display(Name = "Ementa")]
         [Column("disciplina_ementa")]
         public String? Ementa { get; set; }
-
+        
     }
 }

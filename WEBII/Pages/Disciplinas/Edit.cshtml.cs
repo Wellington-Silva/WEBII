@@ -32,28 +32,40 @@ namespace WEBII.Pages.Disciplinas
                 return NotFound();
             }
 
-            var disciplina =  await _context.Disciplina.Include("Categoria").FirstOrDefaultAsync(m => m.Id == id);
+            var disciplina = await _context.Disciplina.Include("Categoria")
+                                        .FirstOrDefaultAsync(m => m.Id == id);
             if (disciplina == null)
             {
                 return NotFound();
             }
             DisciplinaVM.vDisciplina = disciplina;
-            DisciplinaVM.vListCategoria = popularListaCategorias();
+            var prerequisitosDisciplina = _context.PreRequisito.Where(p => p.DisciplinaRequerida.Id == id);
 
-            ViewData["UfId"] = new SelectList(_context.categoria, "Id", "Initials");
+            DisciplinaVM.vListCategoria = popularListaCategorias();
+            DisciplinaVM.vListPreRequisito = popularListaPrerequisitos(disciplina.Id,
+                                            prerequisitosDisciplina
+                                            .Select(p => p.PrerequisitoDisciplina.Id)
+                                                    .ToList());
+
             return Page();
         }
 
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see https://aka.ms/RazorPagesCRUD.
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAsync(string[] prerequisitosSelecionados)
         {
             if (!ModelState.IsValid)
             {
+                DisciplinaVM.vListCategoria = popularListaCategorias();
+                DisciplinaVM.vListPreRequisito = popularListaPrerequisitos(DisciplinaVM.vDisciplina.Id,
+                                                    prerequisitosSelecionados.Select(p => int.Parse(p))
+                                                        .ToList());
+
                 return Page();
             }
 
             _context.Attach(DisciplinaVM.vDisciplina).State = EntityState.Modified;
+            atualizarPrerequisitos(DisciplinaVM.vDisciplina, prerequisitosSelecionados);
 
             try
             {
@@ -76,17 +88,74 @@ namespace WEBII.Pages.Disciplinas
 
         private bool DisciplinaExists(int id)
         {
-          return (_context.Disciplina?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Disciplina?.Any(e => e.Id == id)).GetValueOrDefault();
         }
 
         private List<SelectListItem> popularListaCategorias()
         {
             return _context.categoria
-                                      .Select(a => new SelectListItem()
-                                      {
-                                          Value = a.Id.ToString(),
-                                          Text = a.Categoria_Nome
-                                      }).ToList();
+                                    .Select(a => new SelectListItem()
+                                    {
+                                        Value = a.Id.ToString(),
+                                        Text = a.Categoria_Nome
+                                    }).ToList();
+        }
+
+        private List<SelectListItem> popularListaPrerequisitos(int id, List<int> prerequisitosSelecionados)
+        {
+            return _context.Disciplina
+                                    .Where(p => p.Id != id)
+                                    .Select(p => new SelectListItem()
+                                    {
+                                        Value = p.Id.ToString(),
+                                        Text = p.Nome,
+                                        Selected = prerequisitosSelecionados.Contains(p.Id)
+                                    }).ToList();
+        }
+
+        private void atualizarPrerequisitos(DisciplinaVM disciplina, string[] prerequisitosSelecionados)
+        {
+            List<DisciplinaVM> disciplinasPrerequisito = _context.Disciplina.Where(p => p.Id != disciplina.Id).ToList();
+            List<PreRequisitoVM> prerequisitosDisciplina = _context.PreRequisito.Where(p => p.DisciplinaRequerida.Id == disciplina.Id).ToList();
+
+            if (prerequisitosSelecionados.Count() == 0)
+            {
+                _context.PreRequisito.RemoveRange(prerequisitosDisciplina);
+                return;
+            }
+
+            foreach (var disciplinaPrerequisito in disciplinasPrerequisito)
+            {
+                if (prerequisitosSelecionados.Contains(disciplinaPrerequisito.Id.ToString()))
+                {
+                    if (!prerequisitosDisciplina
+                            .Any(p => p.PrerequisitoDisciplina.Id == disciplinaPrerequisito.Id))
+                    {
+                        _context.PreRequisito.Add(new PreRequisitoVM()
+                        {
+                            DisciplinaRequerida = disciplina,
+                            PrerequisitoDisciplina = disciplinaPrerequisito
+                        });
+                    }
+                }
+                else
+                {
+                    if (prerequisitosDisciplina
+                            .Any(p => p.PrerequisitoDisciplina.Id == disciplinaPrerequisito.Id))
+                    {
+                        _context.PreRequisito.Remove(
+                            (prerequisitosDisciplina
+                                .SingleOrDefault
+                                (
+                                    p => p.DisciplinaRequerida.Id == disciplina.Id
+                                    &&
+                                    p.PrerequisitoDisciplina.Id == disciplinaPrerequisito.Id
+                                )
+                            )
+                        );
+                    }
+                }
+            }
         }
     }
 }
