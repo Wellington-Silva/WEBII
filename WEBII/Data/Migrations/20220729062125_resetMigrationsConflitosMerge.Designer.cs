@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WEBII.Data;
 
@@ -10,9 +11,10 @@ using WEBII.Data;
 namespace WEBII.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220729062125_resetMigrationsConflitosMerge")]
+    partial class resetMigrationsConflitosMerge
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -215,7 +217,7 @@ namespace WEBII.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("WEBII.categoria", b =>
+            modelBuilder.Entity("WEBII.CategoriaVM", b =>
                 {
                     b.Property<int?>("Id")
                         .ValueGeneratedOnAdd()
@@ -231,7 +233,7 @@ namespace WEBII.Migrations
                     b.ToTable("categoria");
                 });
 
-            modelBuilder.Entity("WEBII.Disciplina", b =>
+            modelBuilder.Entity("WEBII.DisciplinaVM", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -268,7 +270,8 @@ namespace WEBII.Migrations
                         .HasColumnName("disciplina_periodo");
 
                     b.Property<int>("categoriaId")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("disciplina_CategoriaId");
 
                     b.Property<int>("qtdPratica")
                         .HasColumnType("int")
@@ -285,34 +288,76 @@ namespace WEBII.Migrations
                     b.ToTable("disciplinas");
                 });
 
-            modelBuilder.Entity("WEBII.PreRequisito", b =>
+            modelBuilder.Entity("WEBII.Models.PerfilVM", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("varchar(255)")
+                        .HasColumnName("Id");
+
+                    b.Property<string>("Nome")
+                        .HasColumnType("longtext")
+                        .HasColumnName("Name");
+
+                    b.Property<string>("NomeNormalizado")
+                        .HasColumnType("longtext")
+                        .HasColumnName("NormalizedName");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("aspnetroles");
+                });
+
+            modelBuilder.Entity("WEBII.Models.UserRoleVM", b =>
+                {
+                    b.Property<string>("IdUser")
+                        .HasColumnType("varchar(255)")
+                        .HasColumnName("UserId");
+
+                    b.Property<string>("IdRole")
+                        .HasColumnType("longtext")
+                        .HasColumnName("RoleId");
+
+                    b.HasKey("IdUser");
+
+                    b.ToTable("aspnetuserroles");
+                });
+
+            modelBuilder.Entity("WEBII.Models.UsuarioVM", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("varchar(255)")
+                        .HasColumnName("Id");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("longtext")
+                        .HasColumnName("Email");
+
+                    b.Property<string>("Nome")
+                        .HasColumnType("longtext")
+                        .HasColumnName("UserName");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("aspnetusers");
+                });
+
+            modelBuilder.Entity("WEBII.PreRequisitoVM", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnName("requisitos_id");
+                        .HasColumnType("int");
 
-                    b.Property<int>("Creditos")
-                        .HasColumnType("int")
-                        .HasColumnName("requisitos_creditos");
+                    b.Property<int>("DisciplinaRequeridaId")
+                        .HasColumnType("int");
 
-                    b.Property<int>("Disciplina_Id")
-                        .HasColumnType("int")
-                        .HasColumnName("disciplina_id");
-
-                    b.Property<string>("Disciplina_Nome")
-                        .HasColumnType("longtext")
-                        .HasColumnName("disciplina_nome");
-
-                    b.Property<int>("Periodo")
-                        .HasColumnType("int")
-                        .HasColumnName("requisitos_periodo");
-
-                    b.Property<string>("Requisitos")
-                        .HasColumnType("longtext")
-                        .HasColumnName("requisitos_disciplina");
+                    b.Property<int>("PrerequisitoDisciplinaId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("DisciplinaRequeridaId");
+
+                    b.HasIndex("PrerequisitoDisciplinaId");
 
                     b.ToTable("prerequisitos");
                 });
@@ -368,15 +413,34 @@ namespace WEBII.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("WEBII.Disciplina", b =>
+            modelBuilder.Entity("WEBII.DisciplinaVM", b =>
                 {
-                    b.HasOne("WEBII.categoria", "Categoria")
+                    b.HasOne("WEBII.CategoriaVM", "Categoria")
                         .WithMany()
                         .HasForeignKey("categoriaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Categoria");
+                });
+
+            modelBuilder.Entity("WEBII.PreRequisitoVM", b =>
+                {
+                    b.HasOne("WEBII.DisciplinaVM", "DisciplinaRequerida")
+                        .WithMany()
+                        .HasForeignKey("DisciplinaRequeridaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("WEBII.DisciplinaVM", "PrerequisitoDisciplina")
+                        .WithMany()
+                        .HasForeignKey("PrerequisitoDisciplinaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("DisciplinaRequerida");
+
+                    b.Navigation("PrerequisitoDisciplina");
                 });
 #pragma warning restore 612, 618
         }

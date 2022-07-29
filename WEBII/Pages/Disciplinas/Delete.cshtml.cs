@@ -22,7 +22,7 @@ namespace WEBII.Pages.Disciplinas
         }
 
         [BindProperty]
-      public DisciplinaVM Disciplina { get; set; } = default!;
+      public DisciplinaViewModel DisciplinaVM { get; set; } = new DisciplinaViewModel();
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -39,7 +39,8 @@ namespace WEBII.Pages.Disciplinas
             }
             else 
             {
-                Disciplina = disciplina;
+                DisciplinaVM.vDisciplina = disciplina;
+                DisciplinaVM.Prerequisitos = _context.PreRequisito.Include("PrerequisitoDisciplina").Where(p => p.DisciplinaRequerida.Id == id).ToList();
             }
             return Page();
         }
@@ -54,8 +55,8 @@ namespace WEBII.Pages.Disciplinas
 
             if (disciplina != null)
             {
-                Disciplina = disciplina;
-                _context.Disciplina.Remove(Disciplina);
+                DisciplinaVM.vDisciplina = disciplina;
+                _context.Disciplina.Remove(DisciplinaVM.vDisciplina);
                 await _context.SaveChangesAsync();
             }
 

@@ -7,9 +7,11 @@ namespace WEBII
     {
         public DisciplinaVM vDisciplina { get; set; }
 
+        public List<PreRequisitoVM>? Prerequisitos { get; set; }
+
         public List<SelectListItem>? vListCategoria { get; set; }
 
-        // public PreRequisito vPreRequisito { get; set; } 
+        public List<SelectListItem>? vListPreRequisito { get; set; }
 
     }
 }
