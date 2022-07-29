@@ -5,7 +5,7 @@ namespace WEBII
 {
     public class DisciplinaViewModel
     {
-        public Disciplina vDisciplina { get; set; }
+        public DisciplinaVM vDisciplina { get; set; }
 
         public List<SelectListItem>? vListCategoria { get; set; }
 

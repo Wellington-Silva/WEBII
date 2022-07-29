@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace WEBII
 {
     [Table("prerequisitos")]
-    public class PreRequisito
+    public class PreRequisitoVM
     {
         [Display(Name = "Requisito ID")]
         [Column("requisitos_id")]

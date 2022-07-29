@@ -23,7 +23,7 @@ namespace WEBII.Pages.PreRequisitos
         }
 
         [BindProperty]
-        public PreRequisito PreRequisito { get; set; } = default!;
+        public PreRequisitoVM PreRequisito { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {

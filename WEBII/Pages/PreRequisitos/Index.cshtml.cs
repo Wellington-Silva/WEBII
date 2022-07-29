@@ -21,7 +21,7 @@ namespace WEBII.Pages.PreRequisitos
             _context = context;
         }
 
-        public IList<PreRequisito> PreRequisito { get;set; } = default!;
+        public IList<PreRequisitoVM> PreRequisito { get;set; } = default!;
 
         public async Task OnGetAsync()
         {

@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace WEBII
 {
     [Table("disciplinas")]
-    public class Disciplina
+    public class DisciplinaVM
     {
         [Display(Name = "id")]
         [Column("disciplina_id")]
@@ -23,7 +23,7 @@ namespace WEBII
         public int categoriaId { get; set; }
         [Display(Name = "Categoria")]
         [Column("disciplina_categoria")]
-        public categoria? Categoria { get; set; }
+        public CategoriaVM? Categoria { get; set; }
 
         [Display(Name = "Dificuldade")]
         [Column("disciplina_dificuldade")]

@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace WEBII
 {
     [Table("categoria")]
-    public class categoria
+    public class CategoriaVM
     {
         [Display(Name = "Categoria ID")]
         [Column("categoria_id")]

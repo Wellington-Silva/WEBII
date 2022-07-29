@@ -10,11 +10,11 @@ namespace WEBII.Data
             : base(options)
         {
         }
-        public DbSet<Disciplina>? Disciplina { get; set; }
+        public DbSet<DisciplinaVM>? Disciplina { get; set; }
 
-        public DbSet<PreRequisito>? PreRequisito { get; set; }
+        public DbSet<PreRequisitoVM>? PreRequisito { get; set; }
 
-        public DbSet<categoria>? categoria { get; set; }
+        public DbSet<CategoriaVM>? categoria { get; set; }
 
         public DbSet<WEBII.Models.PerfilVM>? Perfil { get; set; }
 

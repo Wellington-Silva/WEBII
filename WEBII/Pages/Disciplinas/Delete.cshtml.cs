@@ -22,7 +22,7 @@ namespace WEBII.Pages.Disciplinas
         }
 
         [BindProperty]
-      public Disciplina Disciplina { get; set; } = default!;
+      public DisciplinaVM Disciplina { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {

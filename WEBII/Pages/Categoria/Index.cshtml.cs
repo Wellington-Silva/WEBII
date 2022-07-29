@@ -21,7 +21,7 @@ namespace WEBII.Pages.Categoria
             _context = context;
         }
 
-        public IList<categoria> categoria { get;set; } = default!;
+        public IList<CategoriaVM> categoria { get;set; } = default!;
 
         public async Task OnGetAsync()
         {

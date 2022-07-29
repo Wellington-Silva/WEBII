@@ -27,7 +27,7 @@ namespace WEBII.Pages.PreRequisitos
         }
 
         [BindProperty]
-        public PreRequisito PreRequisito { get; set; } = default!;
+        public PreRequisitoVM PreRequisito { get; set; } = default!;
         
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD

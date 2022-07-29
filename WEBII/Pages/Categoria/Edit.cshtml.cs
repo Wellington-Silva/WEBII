@@ -23,7 +23,7 @@ namespace WEBII.Pages.Categoria
         }
 
         [BindProperty]
-        public categoria categoria { get; set; } = default!;
+        public CategoriaVM categoria { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {

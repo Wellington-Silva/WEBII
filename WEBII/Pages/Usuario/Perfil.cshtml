@@ -5,7 +5,7 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<h1>Inserir Perfil</h1>
 
 <div>
     <h4>UsuarioVM</h4>
@@ -13,7 +13,6 @@
     <form method="post">
     <dl class="row">
         <div class="form-group">
-            <label asp-for="idU" class="control-label"></label>
             <input type="hidden" asp-for="idU" class="form-control" />
             <span asp-validation-for="idU" class="text-danger"></span>
         </div>
@@ -26,12 +25,12 @@
     </div>
     </dl>
     <div class="form-group">
-        <input type="submit" value="Create" class="btn btn-primary" />
+        <input type="submit" value="Inserir" class="btn btn-primary" />
     </div>
     </form>
 </div>
 <div>
-    <a asp-page="./Index">Back to List</a>
+    <a asp-page="./Index">Voltar</a>
 </div>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

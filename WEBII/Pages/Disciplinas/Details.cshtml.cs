@@ -21,7 +21,7 @@ namespace WEBII.Pages.Disciplinas
             _context = context;
         }
 
-      public Disciplina Disciplina { get; set; } = default!; 
+      public DisciplinaVM Disciplina { get; set; } = default!; 
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {

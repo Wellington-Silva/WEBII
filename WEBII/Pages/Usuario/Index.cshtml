@@ -5,12 +5,12 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Usuarios</h1>
 
 <p>
     <!--<a asp-page="Create">Create New</a>-->
 </p>
-<table class="table">
+<table class="table table-bordered table-striped">
     <thead>
         <tr>
             <th>
@@ -19,7 +19,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.UsuarioVM[0].Email)
             </th>
-            <th></th>
+            <th>Acões</th>
         </tr>
     </thead>
     <tbody>
@@ -31,8 +31,8 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Email)
             </td>
-            <td>
-                <a asp-page="./Perfil" asp-route-id="@item.Id">Inserir Perfil</a>
+            <td style="text-align: center;">
+                <a asp-page="./Perfil" asp-route-id="@item.Id"><button class="btn btn-primary" style="background-color:darkorange; border-color:darkorange"><i class="fas fa-user-check"></i>  Inserir Perfil</button></a>
                 <!--<a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
                 <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>-->
             </td>

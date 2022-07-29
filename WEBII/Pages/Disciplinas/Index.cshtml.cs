@@ -22,7 +22,7 @@ namespace WEBII.Pages.Disciplinas
             _context = context;
         }
 
-        public IList<Disciplina> Disciplina { get;set; } = default!;
+        public IList<DisciplinaVM> Disciplina { get;set; } = default!;
 
         public async Task OnGetAsync()
         {

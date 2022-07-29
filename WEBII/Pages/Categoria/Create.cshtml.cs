@@ -27,7 +27,7 @@ namespace WEBII.Pages.Categoria
         }
 
         [BindProperty]
-        public categoria categoria { get; set; } = default!;
+        public CategoriaVM categoria { get; set; } = default!;
         
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD

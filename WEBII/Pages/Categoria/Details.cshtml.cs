@@ -6,8 +6,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using WEBII;
 using WEBII.Data;
+using WEBII.Models;
 
 namespace WEBII.Pages.Categoria
 {

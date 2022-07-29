@@ -12,13 +12,13 @@
         <a asp-page="Create"><button class="btn btn-primary" style="background-color:mediumseagreen; border-color:mediumseagreen"><i class="fas fa-plus-circle"> </i> Adicionar</button></a>
     </p>
 }
-<table class="table">
+<table class="table table-bordered table-striped">
     <thead>
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.categoria[0].Categoria_Nome)
             </th>
-            <th></th>
+            <th>Ações</th>
         </tr>
     </thead>
     <tbody>
@@ -27,7 +27,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Categoria_Nome)
             </td>
-            <td>
+            <td style="text-align: center;">
                 <a asp-page="./Details" asp-route-id="@item.Id"><button class="btn btn-primary" style="background-color:cornflowerblue; border-color:cornflowerblue"><i class="fas fa-eye"></i></button></a>
                     @if (User.IsInRole("admin") || User.IsInRole("coordenador"))
                     {

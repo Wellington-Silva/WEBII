@@ -33,6 +33,7 @@ namespace WEBII.Pages.Usuario
         public async Task<IActionResult> OnGetAsync(string id)
         {
             idU = id;
+            var UserM = await _userManager.FindByIdAsync(id);
             ViewModel.vListPerfil = popularListaPerfil();
             return Page();
         }
