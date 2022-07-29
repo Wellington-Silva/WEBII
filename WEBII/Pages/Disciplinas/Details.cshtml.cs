@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using WEBII;
 using WEBII.Data;
@@ -21,7 +22,7 @@ namespace WEBII.Pages.Disciplinas
             _context = context;
         }
 
-      public DisciplinaVM Disciplina { get; set; } = default!; 
+        public DisciplinaViewModel DisciplinaVM { get; set; } = new DisciplinaViewModel();
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -35,11 +36,13 @@ namespace WEBII.Pages.Disciplinas
             {
                 return NotFound();
             }
-            else 
+            else
             {
-                Disciplina = disciplina;
+                DisciplinaVM.vDisciplina = disciplina;
+                DisciplinaVM.Prerequisitos = _context.PreRequisito.Include("PrerequisitoDisciplina").Where(p => p.DisciplinaRequerida.Id == id).ToList();
             }
             return Page();
         }
+
     }
 }
