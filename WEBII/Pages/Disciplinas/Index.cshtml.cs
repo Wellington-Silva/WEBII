@@ -12,7 +12,7 @@ using WEBII.Data;
 
 namespace WEBII.Pages.Disciplinas
 {
-    [Authorize(Roles="admin")]
+    [Authorize]
     public class IndexModel : PageModel
     {
         private readonly WEBII.Data.ApplicationDbContext _context;

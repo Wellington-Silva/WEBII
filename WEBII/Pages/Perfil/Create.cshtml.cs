@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -11,13 +13,16 @@ using WEBII.Models;
 
 namespace WEBII.Pages.Perfil
 {
+    [Authorize(Roles = "admin")]
     public class CreateModel : PageModel
     {
         private readonly WEBII.Data.ApplicationDbContext _context;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
-        public CreateModel(WEBII.Data.ApplicationDbContext context)
+        public CreateModel(WEBII.Data.ApplicationDbContext context, RoleManager<IdentityRole> roleManager)
         {
             _context = context;
+            _roleManager = roleManager;
         }
 
         public IActionResult OnGet()
@@ -30,7 +35,7 @@ namespace WEBII.Pages.Perfil
         
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAsync(string Nome)
         {
             string idcategoria="";
           if (!ModelState.IsValid || _context.Perfil == null || PerfilVM == null)

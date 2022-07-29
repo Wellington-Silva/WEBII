@@ -4,11 +4,12 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WEBII.Models
 {
-    [Keyless]
+
     [Table("aspnetuserroles")]
+    
     public class UserRoleVM
     {
-
+        [Key]
         [Display(Name = "id User")]
         [Column("UserId")]
         public string? IdUser { get; set; }
@@ -18,4 +19,5 @@ namespace WEBII.Models
         public string? IdRole { get; set; }
 
     }
+
 }
