@@ -16,6 +16,8 @@ namespace WEBII.Data
 
         public DbSet<CategoriaVM>? categoria { get; set; }
 
+        public DbSet<PreRequisitoVM>? Prerequisito { get; set; }
+
         public DbSet<WEBII.Models.PerfilVM>? Perfil { get; set; }
 
         public DbSet<WEBII.Models.UsuarioVM>? UsuarioVM { get; set; }
