@@ -215,7 +215,7 @@ namespace WEBII.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("WEBII.categoria", b =>
+            modelBuilder.Entity("WEBII.CategoriaVM", b =>
                 {
                     b.Property<int?>("Id")
                         .ValueGeneratedOnAdd()
@@ -231,7 +231,7 @@ namespace WEBII.Migrations
                     b.ToTable("categoria");
                 });
 
-            modelBuilder.Entity("WEBII.Disciplina", b =>
+            modelBuilder.Entity("WEBII.DisciplinaVM", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -307,13 +307,15 @@ namespace WEBII.Migrations
 
             modelBuilder.Entity("WEBII.Models.UserRoleVM", b =>
                 {
+                    b.Property<string>("IdUser")
+                        .HasColumnType("varchar(255)")
+                        .HasColumnName("UserId");
+
                     b.Property<string>("IdRole")
                         .HasColumnType("longtext")
                         .HasColumnName("RoleId");
 
-                    b.Property<string>("IdUser")
-                        .HasColumnType("longtext")
-                        .HasColumnName("UserId");
+                    b.HasKey("IdUser");
 
                     b.ToTable("aspnetuserroles");
                 });
@@ -337,7 +339,7 @@ namespace WEBII.Migrations
                     b.ToTable("aspnetusers");
                 });
 
-            modelBuilder.Entity("WEBII.Prerequisito", b =>
+            modelBuilder.Entity("WEBII.PreRequisitoVM", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -355,7 +357,7 @@ namespace WEBII.Migrations
 
                     b.HasIndex("PrerequisitoDisciplinaId");
 
-                    b.ToTable("Prerequisito");
+                    b.ToTable("prerequisitos");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -409,9 +411,9 @@ namespace WEBII.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("WEBII.Disciplina", b =>
+            modelBuilder.Entity("WEBII.DisciplinaVM", b =>
                 {
-                    b.HasOne("WEBII.categoria", "Categoria")
+                    b.HasOne("WEBII.CategoriaVM", "Categoria")
                         .WithMany()
                         .HasForeignKey("categoriaId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -420,15 +422,15 @@ namespace WEBII.Migrations
                     b.Navigation("Categoria");
                 });
 
-            modelBuilder.Entity("WEBII.Prerequisito", b =>
+            modelBuilder.Entity("WEBII.PreRequisitoVM", b =>
                 {
-                    b.HasOne("WEBII.Disciplina", "DisciplinaRequerida")
+                    b.HasOne("WEBII.DisciplinaVM", "DisciplinaRequerida")
                         .WithMany()
                         .HasForeignKey("DisciplinaRequeridaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("WEBII.Disciplina", "PrerequisitoDisciplina")
+                    b.HasOne("WEBII.DisciplinaVM", "PrerequisitoDisciplina")
                         .WithMany()
                         .HasForeignKey("PrerequisitoDisciplinaId")
                         .OnDelete(DeleteBehavior.Cascade)
